@@ -68,14 +68,12 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 	@Override
 	public V get(K key) {
 		if (key == null) throw new NullPointerException();
-		if (!containsKey(key)) throw new NoSuchElementException();
-		int foundIndex = 0;
 		for (int i = 0; i < size; i++) {
 			if (keys[i].equals(key)) {
-				foundIndex = i;
+				return values[i];
 			}
 		}
-		return values[foundIndex];
+		return null;
 	}
 
 	@Override
