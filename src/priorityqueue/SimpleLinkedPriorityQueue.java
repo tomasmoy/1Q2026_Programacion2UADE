@@ -49,6 +49,9 @@ public class SimpleLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 		if (isEmpty()) throw new NoSuchElementException("La Cola Esta Vacía");
 		LinkedPriorityNode<E> elementDeQueued = last;
 		last = last.prev;
+		if (last != null) last.next = null;
+		else first = null;
+		size--;
 		return elementDeQueued.value;
 	}
 

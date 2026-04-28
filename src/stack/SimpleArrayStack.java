@@ -39,10 +39,10 @@ public class SimpleArrayStack<E> implements SimpleStack<E> {
 
 	@Override
 	public void clear() {
-		for(int i = 0; i<size; i++) {
+		for(int i = 0; i < size; i++) {
 			elements[i] = null;
-			size--;
 		}
+		size = 0;
 	}
 
 	@Override

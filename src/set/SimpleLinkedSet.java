@@ -47,12 +47,12 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 				} else {
 				    last = current.prev;
 				}
+				size--;
+				return true;
 			}				
 			current = current.next;
 		}
-		
-		size--;
-		return true;
+		return false;
 	}
 
 	@Override

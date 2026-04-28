@@ -4,7 +4,7 @@ public class SimpleArraySet<E> implements SimpleSet<E> {
 	
 	private int size = 0;
 	private int capacity = 0;
-	private static final int DEFAULT_CAPACITY = 0;
+	private static final int DEFAULT_CAPACITY = 4;
 	private E[] elements;
 	
 	public SimpleArraySet() {
