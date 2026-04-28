@@ -28,7 +28,7 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 		validateSize(size+1);
 		int insertIndex = size;
 		
-		for (int i = insertIndex; i > 0 && priority < priorities[i] ; i--) {
+		for (int i = insertIndex; i > 0 && priority > priorities[i-1] ; i--) {
 			elements[i] = elements[i-1];
 			priorities[i] = priorities[i-1];
 			insertIndex = i - 1;
@@ -79,7 +79,7 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 	}
 	
 	public E[] toArray() {
-		E[] result = (E[]) new CaseObject[size];
+		E[] result = (E[]) new Object[size];
 		for (int i = 0; i < size;i++) {
 			result[i] = elements[i];
 		}
