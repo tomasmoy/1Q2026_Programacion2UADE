@@ -2,6 +2,7 @@ package application;
 
 import java.util.Scanner;
 
+import dictionary.DictionaryExercise;
 import list.ListExercise;
 import priorityqueue.PriorityQueueExercise;
 import queue.QueueExercise;
@@ -36,6 +37,7 @@ public class MainProgram {
 			System.out.println("4 - Stack Exercise");
 			System.out.println("5 - Set Exercise");
 			System.out.println("6 - Issue Tracker");
+			System.out.println("7 - Inventory Management");
 			
 			String userInput = scanner.nextLine();
 			
@@ -60,6 +62,9 @@ public class MainProgram {
 				break;
 			case "6":
 				exercise = new PriorityQueueExercise(scanner);
+				break;
+			case "7":
+				exercise = new DictionaryExercise(scanner);
 				break;
 			default:
 				System.out.println("Entrada inválida, intentá de nuevo.");			

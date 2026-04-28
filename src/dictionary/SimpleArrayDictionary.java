@@ -6,7 +6,7 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	private int size = 0;
 	private int capacity = 0;
-	private static final int DEFAULT_CAPACITY = 0;
+	private static final int DEFAULT_CAPACITY = 4;
 	private K[] keys;
 	private V[] values;
 	
@@ -24,25 +24,26 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		if (key == null|| value == null) throw new NullPointerException();
+		if (key == null || value == null) throw new NullPointerException("La clave o el valor no pueden ser nulos.");
 		
-		try {
-			int index = keyIndex(key);
-			V oldValue = values[index];
-			values[index] = value;
-			return oldValue;
-		} catch (Exception e) {
-			validateSize(size+1);
-			keys[size] = key;
-			values[size] = value;
-			size++;
-			return null;
+		for (int i = 0; i < size; i++) {
+			if (keys[i].equals(key)) {
+				V oldValue = values[i];
+				values[i] = value;
+				return oldValue;
+			}
 		}
+		
+		validateSize(size+1);
+		keys[size] = key;
+		values[size] = value;
+		size++;
+		return null;
 	}
 
 	@Override
 	public boolean remove(K key) {
-		if (key == null) throw new NullPointerException();
+		if (key == null) throw new NullPointerException("La clave no puede ser nula.");
 		
 		for (int i = 0; i < size; i++) {
 			if (keys[i].equals(key)) {
@@ -58,7 +59,7 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	@Override
 	public boolean containsKey(K key) {
-		if (key == null) throw new NullPointerException();
+		if (key == null) throw new NullPointerException("La clave no puede ser nula.");
 		for (int i = 0; i < size; i++) {
 			if (keys[i].equals(key)) return true;
 		}
@@ -67,7 +68,7 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	@Override
 	public V get(K key) {
-		if (key == null) throw new NullPointerException();
+		if (key == null) throw new NullPointerException("La clave no puede ser nula.");
 		for (int i = 0; i < size; i++) {
 			if (keys[i].equals(key)) {
 				return values[i];
@@ -76,14 +77,28 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public K[] keys() {
-		return keys;
+		K[] result = (K[]) new Object[size];
+
+	    for (int i = 0; i < size; i++) {
+	        result[i] = keys[i];
+	    }
+
+	    return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public V[] values() {
-		return values;
+		V[] result = (V[]) new Object[size];
+
+	    for (int i = 0; i < size; i++) {
+	        result[i] = values[i];
+	    }
+
+	    return result;
 	}
 
 	@Override
@@ -134,11 +149,4 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 		values = newValues;
 	}
 
-	public int keyIndex(K key) {
-		if (key == null) throw new NullPointerException();
-		for (int i = 0; i < size; i++) {
-			if (keys[i].equals(key)) return i;
-		}
-		throw new NoSuchElementException();
-	}
 }
