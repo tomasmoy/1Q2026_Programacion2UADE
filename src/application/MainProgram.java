@@ -29,6 +29,9 @@ public class MainProgram {
 	}
 	
 	private void selectExercise(Scanner scanner){
+			
+			System.out.println("Bienvenido a Software Launcher!");
+		
 			System.out.println("Elija una opcion para continuar:");
 			System.out.println("0 - Salir");
 			System.out.println("1 - Test Exercise");
@@ -36,8 +39,8 @@ public class MainProgram {
 			System.out.println("3 - Queue Exercise");
 			System.out.println("4 - Stack Exercise");
 			System.out.println("5 - Set Exercise");
-			System.out.println("6 - Issue Tracker");
-			System.out.println("7 - Inventory Management");
+			System.out.println("6 - Issue Tracker (Priority Queue)");
+			System.out.println("7 - Inventory Management (Dictionary)");
 			
 			String userInput = scanner.nextLine();
 			

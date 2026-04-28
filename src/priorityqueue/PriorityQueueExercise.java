@@ -136,10 +136,27 @@ public class PriorityQueueExercise extends Exercise {
 			System.out.println("La Cola Esta Vacia, Cargue casos e intente nuevamente.");
 			currentPhase = 0;
 		} else {
-		CaseObject[] result = caseQueue.toArray();
+		Object[] result = caseQueue.toArray();
 		for (int i = 0; i < result.length; i++) {
-			CaseObject actualCase = result[i];
+			CaseObject actualCase = (CaseObject) result[i];
 			System.out.println("Titulo: " + actualCase.caseTitle + " - Descripción: " + actualCase.caseDesc + " - Prioridad: " + casePriorityTranslator(actualCase.casePriority) + "\n");
+			
+			System.out.println("Desea Cerrar el Caso? (s/n)");
+			
+			String closeFlag = scanner.nextLine().toLowerCase();
+			
+			switch(closeFlag) {
+			case "s":
+				CaseObject dequeued = caseQueue.dequeue();
+				closedCases.add(dequeued);
+				currentPhase = 0;
+				break;
+			case "n":
+				continue;				
+			default:
+				System.out.println("Entrada Incorrecta, intentelo nuevamente\n");
+				break;
+			}
 		}
 		}
 		currentPhase = 0;
@@ -148,7 +165,7 @@ public class PriorityQueueExercise extends Exercise {
 	private void reviewClosedCases() {
 		System.out.println("---- Casos Cerrados -----");
 		if (closedCases.isEmpty()) {
-			System.out.println("No hay casos cerrados. Cierre casos y reintente.\n");
+			System.out.println("No hay casos cerrados.\n");
 			currentPhase = 0;
 		}
 		for (int i = 0; i < closedCases.size(); i++) {
