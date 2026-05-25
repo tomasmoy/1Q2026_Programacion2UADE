@@ -8,6 +8,7 @@ import priorityqueue.PriorityQueueExercise;
 import queue.QueueExercise;
 import set.SetExercise;
 import stack.StackExercise;
+import treeModule.ContactsApp;
 
 public class MainProgram {
 
@@ -41,7 +42,7 @@ public class MainProgram {
 			System.out.println("5 - Set Exercise");
 			System.out.println("6 - Issue Tracker (Priority Queue)");
 			System.out.println("7 - Inventory Management (Dictionary)");
-			
+			System.out.println("8 - Contacts App");
 			String userInput = scanner.nextLine();
 			
 			switch (userInput) {
@@ -68,6 +69,9 @@ public class MainProgram {
 				break;
 			case "7":
 				exercise = new DictionaryExercise(scanner);
+				break;
+			case "8":
+				exercise = new ContactsApp(scanner);
 				break;
 			default:
 				System.out.println("Entrada inválida, intentá de nuevo.");			
