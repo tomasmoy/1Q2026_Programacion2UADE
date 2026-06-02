@@ -3,14 +3,14 @@ package treeModule;
 import list.SimpleArrayList;
 
 public class BST<E extends Comparable<E>> {
-	public TreeNode<E> root = null;
-	private int size = 0;
+	protected TreeNode<E> root = null;
+	protected int size = 0;
 
 	public void insert(E value) {
 		root = insertRecursive(root,value);
 	}
 	
-	private TreeNode<E> insertRecursive(TreeNode<E> current, E value){
+	protected TreeNode<E> insertRecursive(TreeNode<E> current, E value){
 		if (current == null) {
 			size++;
 			return new TreeNode<E>(value);
@@ -31,7 +31,7 @@ public class BST<E extends Comparable<E>> {
 		return containsRecursive(root, value);
 	}
 	
-	private boolean containsRecursive(TreeNode<E> current, E value) {
+	protected boolean containsRecursive(TreeNode<E> current, E value) {
 		if (current == null) {
 			return false;
 		}
@@ -54,7 +54,7 @@ public class BST<E extends Comparable<E>> {
 		root = removeRecursive(root, value);
 	}
 	
-	private TreeNode<E> removeRecursive(TreeNode<E> current, E value){
+	protected TreeNode<E> removeRecursive(TreeNode<E> current, E value){
 		if (current == null) return null;
 		
 		int compareResult = value.compareTo(current.value);
@@ -90,7 +90,7 @@ public class BST<E extends Comparable<E>> {
 		return current;
 	}
 	
-	private TreeNode<E> findSuccesor(TreeNode<E> current) {
+	protected TreeNode<E> findSuccesor(TreeNode<E> current) {
 		while(current.left != null) {
 			current = current.left;
 		}
@@ -135,6 +135,21 @@ public class BST<E extends Comparable<E>> {
 		postOrderRec(current.left,result);
 		postOrderRec(current.right,result);
 		result.add(current.value);
+	}
+	
+	public int height() {
+		return getNodeHeightRecursive(root);
+	}
+	
+	protected int getNodeHeightRecursive(TreeNode<E> current) {
+		if (current == null) {
+			return -1; // Si no hay current devuelvo -1 para cancelar ultimo paso recursivo.
+		} //Else --> Paso Recursivo: Cuento 1
+		return 1 + Math.max(getNodeHeightRecursive(current.left),getNodeHeightRecursive(current.right));
+	}
+	
+	protected int getBalanceFactor(TreeNode <E> node) {
+		return getNodeHeightRecursive(node.left) - getNodeHeightRecursive(node.right);
 	}
 	
 	public boolean isEmpty() {

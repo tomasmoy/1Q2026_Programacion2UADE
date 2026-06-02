@@ -5,11 +5,13 @@ public class Contact implements Comparable<Contact>{
 	String firstName;
 	String lastName;
 	int cellphone;
-		
-	public Contact(String nombre, String apellido,int telefono) {
+	String email;
+
+	public Contact(String nombre, String apellido,int telefono, String email) {
 		this.firstName = nombre;
 		this.lastName = apellido;
 		this.cellphone = telefono;
+		this.email = email;
 	}
 
 	public String getFirstName() {
@@ -45,7 +47,13 @@ public class Contact implements Comparable<Contact>{
 		this.cellphone = cellphone;
 	}
 
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public int compareTo(Contact other) {

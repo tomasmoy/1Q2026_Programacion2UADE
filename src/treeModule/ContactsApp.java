@@ -1,6 +1,8 @@
 package treeModule;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.Exercise;
 import list.SimpleArrayList;
@@ -9,6 +11,7 @@ public class ContactsApp extends Exercise{
 	private int currentPhase = 0;
 	private boolean firstTime = true;
 	BST<Contact> contactList;
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 	
 	public ContactsApp(Scanner scanner) {
 		super(scanner);
@@ -104,9 +107,11 @@ public class ContactsApp extends Exercise{
 		System.out.println("Ingrese el Apellido: \n");
 		String apellido = scanner.nextLine().toLowerCase();
 		System.out.println("Ingrese el Telefono: \n");
-		int telefono = readInt();
+		int telefono = readInt(); 
+		System.out.println("Ingrese el email: \n");
+		String email = validateEmail();
 		
-		Contact newContact = new Contact(nombre, apellido, telefono);
+		Contact newContact = new Contact(nombre, apellido, telefono, email);
 		
 		contactList.insert(newContact);
 		
@@ -132,7 +137,8 @@ public class ContactsApp extends Exercise{
 	    System.out.println("\n1 - Nombre");
 	    System.out.println("2 - Apellido");
 	    System.out.println("3 - Telefono");
-	    System.out.println("4 - Cancelar");
+	    System.out.println("4 - Email");
+	    System.out.println("5 - Cancelar");
 
 	    String option = scanner.nextLine();
 
@@ -167,8 +173,15 @@ public class ContactsApp extends Exercise{
 
 	        System.out.println("Telefono actualizado!");
 	        break;
+	        
+	    case "4":
+	        System.out.println("Nuevo Email:");
+	        selected.setEmail(validateEmail());
+	
+	        System.out.println("Email actualizado!");
+	        break;
 	    }
-
+	 
 	    currentPhase = 0;
 	}
 
@@ -208,7 +221,8 @@ public class ContactsApp extends Exercise{
 		System.out.println("1 - Nombre");
 		System.out.println("2 - Apellido");
 		System.out.println("3 - Telefono");
-		System.out.println("4 - Volver Atras");
+		System.out.println("4 - Email");
+		System.out.println("5 - Volver Atras");
 		
 		String userSelect = scanner.nextLine().toLowerCase();
 		
@@ -279,6 +293,27 @@ public class ContactsApp extends Exercise{
 			}
 			break;
 		case "4":
+			System.out.println("Ingrese el Email a buscar: ");
+			String emailSearch = scanner.nextLine().toLowerCase();
+			
+			SimpleArrayList<Contact> resultContactSearchEmail = new SimpleArrayList<>();
+			for (int i = 0; i < allContacts.size();i++) {
+				Contact contact = allContacts.get(i);
+				String contactEmail = contact.getEmail();
+				if (contactEmail.startsWith(emailSearch)){
+					resultContactSearchEmail.add(contact);
+				}
+			}
+			if (checkSearchResults(resultContactSearchEmail)) {
+				for (int j = 0; j < resultContactSearchEmail.size(); j++) {
+					System.out.println(j +" - " + getContactDetails(resultContactSearchEmail.get(j)));
+				}
+				return resultContactSearchEmail;
+			} else {
+				System.out.println("No hay elementos para la búsqueda realizada. \n");
+			}
+			break;
+		case "5":
 			currentPhase = 0;
 			return null;
 		default:
@@ -302,21 +337,21 @@ public class ContactsApp extends Exercise{
 	
 	private void loadDatabase() {
 		Contact[] contacts = {
-			    new Contact("Juan", "Pérez", 1123456789),
-			    new Contact("María", "Gómez", 1134567890),
-			    new Contact("Lucas", "Fernández", 1145678901),
-			    new Contact("Sofía", "Martínez", 1156789012),
-			    new Contact("Juan", "Rodríguez", 1167890123),
-			    new Contact("Valentina", "López", 1178901234),
-			    new Contact("Martín", "Sánchez", 1189012345),
-			    new Contact("Camila", "Ramírez", 1190123456),
-			    new Contact("Lucas", "Torres", 1101234567),
-			    new Contact("Julieta", "Flores", 1112345678),
-			    new Contact("Agustín", "Acosta", 1122334455),
-			    new Contact("María", "Herrera", 1133445566),
-			    new Contact("Franco", "Castro", 1144556677),
-			    new Contact("Lucía", "Morales", 1155667788),
-			    new Contact("Juan", "Ortiz", 1166778899)
+			    new Contact("Juan", "Pérez", 1123456789, "juan.perez@gmail.com"),
+			    new Contact("María", "Gómez", 1134567890, "maria.gomez@gmail.com"),
+			    new Contact("Lucas", "Fernández", 1145678901, "lucas.fernandez@gmail.com"),
+			    new Contact("Sofía", "Martínez", 1156789012, "sofia.martinez@gmail.com"),
+			    new Contact("Juan", "Rodríguez", 1167890123, "juan.rodriguez@gmail.com"),
+			    new Contact("Valentina", "López", 1178901234, "valentina.lopez@gmail.com"),
+			    new Contact("Martín", "Sánchez", 1189012345, "martin.sanchez@gmail.com"),
+			    new Contact("Camila", "Ramírez", 1190123456, "camila.ramirez@gmail.com"),
+			    new Contact("Lucas", "Torres", 1101234567, "lucas.torres@gmail.com"),
+			    new Contact("Julieta", "Flores", 1112345678, "julieta.flores@gmail.com"),
+			    new Contact("Agustín", "Acosta", 1122334455, "agustin.acosta@gmail.com"),
+			    new Contact("María", "Herrera", 1133445566, "maria.herrera@gmail.com"),
+			    new Contact("Franco", "Castro", 1144556677, "franco.castro@gmail.com"),
+			    new Contact("Lucía", "Morales", 1155667788, "lucia.morales@gmail.com"),
+			    new Contact("Juan", "Ortiz", 1166778899, "juan.ortiz@gmail.com")
 		};
 		for (Contact c : contacts) {
 			contactList.insert(c);
@@ -326,7 +361,7 @@ public class ContactsApp extends Exercise{
 	}
 	
 	private String getContactDetails(Contact contact) {
-		return String.join(" - ",(contact.getFirstName() + " " + contact.getLastName()),Integer.toString(contact.getCellphone())); 
+		return String.join(" - ",(contact.getFirstName() + " " + contact.getLastName()),Integer.toString(contact.getCellphone()),contact.getEmail()); 
 	}
 	
 	private Contact selectContact(SimpleArrayList<Contact> list) {
@@ -343,6 +378,21 @@ public class ContactsApp extends Exercise{
 	private boolean checkSearchResults(SimpleArrayList<Contact> list) {
 		return !list.isEmpty();
 	}
+	
+	private String validateEmail() {
+	    while (true) {
+	        String input = scanner.nextLine();
+	        	Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(input);
+	            if (matcher.matches()) {
+	            	return input;
+	            }
+	            else {
+	            	System.out.println("Email no valido. Intenta nuevamente.");
+	            }
+
+	    }
+	}
+	
 	
 	private int readInt() {
 	    while (true) {
