@@ -10,12 +10,12 @@ import list.SimpleArrayList;
 public class ContactsApp extends Exercise{
 	private int currentPhase = 0;
 	private boolean firstTime = true;
-	BST<Contact> contactList;
+	AVL<Contact> contactList;
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 	
 	public ContactsApp(Scanner scanner) {
 		super(scanner);
-		this.contactList = new BST<>();
+		this.contactList = new AVL<>();
 	}
 
 	@Override
