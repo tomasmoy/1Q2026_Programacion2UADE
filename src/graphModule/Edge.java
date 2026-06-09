@@ -8,9 +8,13 @@ public class Edge<T> {
 		this.destination = destination;
 		this.weight = weight;
 	};
-
-	public boolean equals(T other) {
+	
+	@Override
+	public boolean equals(Object other) {
 		if (other.getClass() != getClass()) return false;
-		
+		@SuppressWarnings("unchecked")
+		Edge<T> edge = (Edge<T>) other;
+		if (destination != edge.destination && weight != edge.weight) return false;
+		return true;
 	}
 }

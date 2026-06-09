@@ -48,12 +48,20 @@ public class ListGraph<T> implements Graph<T> {
 			adjacencyList.get(from).add(new Edge<T>(to,weight));
 			return true;
 		}
+		if (edge.weight != weight) {
+			edge.weight = weight;
+			return true;
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean removeEdge(T from, T to) {
-		// TODO Auto-generated method stub
+		Edge <T> edge = getEdge(from,to);
+		if(edge != null) {
+			adjacencyList.get(from).remove(edge);
+		}
 		return false;
 	}
 
