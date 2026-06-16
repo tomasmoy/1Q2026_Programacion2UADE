@@ -45,8 +45,8 @@ public class MainProgram {
 			System.out.println("6 - Issue Tracker (Priority Queue)");
 			System.out.println("7 - Inventory Management (Dictionary)");
 			System.out.println("8 - Contacts App");
-			System.out.println("9 - Dijkstra dungeon solver");
-			System.out.println("10 - UADEMaps");
+			System.out.println("9 - Dungeon Solver (Dijkstra)");
+			System.out.println("10 - UADEMaps (Dijkstra)");
 			String userInput = scanner.nextLine();
 			
 			switch (userInput) {

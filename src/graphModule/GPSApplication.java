@@ -223,12 +223,12 @@ public class GPSApplication extends Exercise {
 	            if (edge.weight > 10) {
 	                criticalDelay++;
 
-	                System.out.println("[CRITICA] " + station + " -> " + edge.destination + " (Peso: " + edge.weight + ")");
+	                System.out.println("DEMORA: [CRITICA] " + station + " -> " + edge.destination + " (Peso: " + edge.weight + ")");
 
 	            } else if (edge.weight > 3) {
 	                highDelay++;
 
-	                System.out.println("[ALTA] " + station + " -> " + edge.destination + " (Peso: " + edge.weight + ")");
+	                System.out.println("DEMORA: [ALTA] " + station + " -> " + edge.destination + " (Peso: " + edge.weight + ")");
 
 	            } else {
 	                normal++;
