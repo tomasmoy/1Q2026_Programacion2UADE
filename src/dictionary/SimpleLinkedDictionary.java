@@ -3,6 +3,10 @@ package dictionary;
 import java.util.ArrayList;
 import java.util.List;
 
+import list.SimpleArrayList;
+import list.SimpleLinkedList;
+import list.SimpleList;
+
 public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	public SimpleLinkedDictionaryNode<K,V> first = null;
@@ -101,12 +105,11 @@ public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K, V> {
 	}
 
 	@Override
-	public K[] keys() {
+	public SimpleList<K> keys() {
 		SimpleLinkedDictionaryNode<K,V> current = first;
-		K[] keyArray = (K[]) new Object[size];
-		int i = 0;
+		SimpleList<K> keyArray = new SimpleLinkedList<K>();
 		while (current != null) {
-			keyArray[i++] = current.key;
+			keyArray.add(current.key);
 			current = current.next;
 		}
 		return keyArray;

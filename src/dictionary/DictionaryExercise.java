@@ -3,6 +3,7 @@ package dictionary;
 import java.util.Scanner;
 
 import application.Exercise;
+import list.SimpleList;
 
 public class DictionaryExercise extends Exercise {
 	private int currentPhase = 0;
@@ -169,7 +170,7 @@ public class DictionaryExercise extends Exercise {
 			boolean isChangingAtttributes = true;
 			
 			while (isChangingAtttributes) {
-				System.out.println("Seleccione el atributo a eliminar: \n");
+				System.out.println("Seleccione el atributo a editar: \n");
 				System.out.println("1 - Editar Precio\n");
 				System.out.println("2 - Editar Cantidad en Stock\n");
 				System.out.println("3 - Confirmar\n");
@@ -232,10 +233,10 @@ public class DictionaryExercise extends Exercise {
 			
 			double totalProductPrice = 0;
 			
-			Object[] keys = items.keys(); // Parseo a Object, para convertir luego las Keys a String.
-			
-			for (int i = 0; i < keys.length; i++) {
-				String key = (String) keys[i];
+			SimpleList<String> keys = items.keys(); // Parseo a Object, para convertir luego las Keys a String.
+			int keysSize = keys.size();
+			for (int i = 0; i < keysSize; i++) {
+				String key = (String) keys.get(i);
 				Product product = items.get(key);
 				System.out.println(getProductDetails(product));
 				totalProductPrice += (product.productPrice * product.productQuantity);

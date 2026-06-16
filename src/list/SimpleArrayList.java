@@ -9,7 +9,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 	
 	@SuppressWarnings("unchecked")
 	public SimpleArrayList(int capacity) {
-		if (capacity == 0) {
+		if (capacity <= 0) {
 			this.capacity = DEFAULT_CAPACITY;
 		} else {
 			this.capacity = capacity;

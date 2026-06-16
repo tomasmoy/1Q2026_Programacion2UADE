@@ -8,11 +8,13 @@ public class SimpleArraySet<E> implements SimpleSet<E> {
 	private E[] elements;
 	
 	public SimpleArraySet() {
-		this.elements = (E[]) new Object[DEFAULT_CAPACITY];
+		this.capacity = DEFAULT_CAPACITY;
+		this.elements = (E[]) new Object[this.capacity];
 	}
 	
 	public SimpleArraySet(int capacity) {
-		this.elements = (E[]) new Object[capacity];
+		this.capacity = capacity;
+		this.elements = (E[]) new Object[this.capacity];
 	}
 
 	@Override

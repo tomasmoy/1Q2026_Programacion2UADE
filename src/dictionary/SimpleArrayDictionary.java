@@ -2,6 +2,9 @@ package dictionary;
 
 import java.util.NoSuchElementException;
 
+import list.SimpleArrayList;
+import list.SimpleList;
+
 public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	private int size = 0;
@@ -79,11 +82,11 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K, V> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public K[] keys() {
-		K[] result = (K[]) new Object[size];
+	public SimpleList<K> keys() {
+		SimpleList<K> result = new SimpleArrayList<K>();
 
 	    for (int i = 0; i < size; i++) {
-	        result[i] = keys[i];
+	        result.add(keys[i]);
 	    }
 
 	    return result;
