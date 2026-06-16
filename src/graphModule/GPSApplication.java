@@ -78,7 +78,7 @@ public class GPSApplication extends Exercise {
 	
 	private Graph<String> loadSubte() {
 		Graph<String> subteMap = new ListGraph<String>();
-
+// C->E(RetiroOK) E->B OK E->A OK C->A OK D->E E->H
 	    String[] lineaA = {
 	        "Linea A - San Pedrito", "Linea A - San Jose de Flores", "Linea A - Carabobo", "Linea A - Puan",
 	        "Linea A - Primera Junta", "Linea A - Acoyte", "Linea A - Rio de Janeiro", "Linea A - Castro Barros",
@@ -128,14 +128,19 @@ public class GPSApplication extends Exercise {
 	    conectarLinea(subteMap, lineaE);
 	    conectarLinea(subteMap, lineaH);
 
-	    generarTrasbordo(subteMap,"Linea A - Lima","Linea C - Avenida de Mayo",3); 
-	    generarTrasbordo(subteMap,"Linea A - Peru","Linea D - Catedral",3);     
-	    generarTrasbordo(subteMap,"Linea B - Carlos Pellegrini","Linea D - 9 de Julio",3);
-	    generarTrasbordo(subteMap,"Linea B - Carlos Pellegrini","Linea C - Diagonal Norte",3);
-	    generarTrasbordo(subteMap,"Linea C - Independencia","Linea E - Independencia",3);
-	    generarTrasbordo(subteMap,"Linea H - Once","Linea A - Plaza Miserere",3); 
-	    generarTrasbordo(subteMap,"Linea H - Santa Fe","Linea D - Pueyrredon",3);
-	    generarTrasbordo(subteMap,"Linea H - Corrientes","Linea B - Pueyrredon",3);
+	    generarTrasbordo(subteMap,"Linea A - Lima","Linea C - Avenida de Mayo",1); 
+	    generarTrasbordo(subteMap,"Linea A - Peru","Linea D - Catedral",1);     
+	    generarTrasbordo(subteMap,"Linea B - Carlos Pellegrini","Linea D - 9 de Julio",1);
+	    generarTrasbordo(subteMap,"Linea B - Carlos Pellegrini","Linea C - Diagonal Norte",1);
+	    generarTrasbordo(subteMap,"Linea C - Independencia","Linea E - Independencia",1);
+	    generarTrasbordo(subteMap,"Linea C - Retiro","Linea E - Retiro",1);
+	    generarTrasbordo(subteMap,"Linea H - Once","Linea A - Plaza Miserere",1); 
+	    generarTrasbordo(subteMap,"Linea H - Santa Fe","Linea D - Pueyrredon",1);
+	    generarTrasbordo(subteMap,"Linea H - Corrientes","Linea B - Pueyrredon",1);
+	    generarTrasbordo(subteMap,"Linea H - Corrientes","Linea B - Pueyrredon",1);
+	    generarTrasbordo(subteMap,"Linea E - Correo Central","Linea B - Leandro N. Alem",1);
+	    generarTrasbordo(subteMap,"Linea E - Bolivar","Linea A - Peru",1);
+	    generarTrasbordo(subteMap,"Linea E - Bolivar","Linea D - Catedral",1);
 	    
 	    return subteMap;
 	}
@@ -340,6 +345,8 @@ public class GPSApplication extends Exercise {
 	            );
 	        }
 	    }
+	    currentPhase = 0;
+	    return;
 	}
 	
 	private void savedRoutes() {
