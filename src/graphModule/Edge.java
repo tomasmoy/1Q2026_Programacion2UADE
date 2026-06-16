@@ -14,7 +14,6 @@ public class Edge<T> {
 		if (other.getClass() != getClass()) return false;
 		@SuppressWarnings("unchecked")
 		Edge<T> edge = (Edge<T>) other;
-		if (destination != edge.destination && weight != edge.weight) return false;
-		return true;
-	}
+        return destination == edge.destination && weight == edge.weight;
+    }
 }

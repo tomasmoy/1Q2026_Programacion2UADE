@@ -3,6 +3,7 @@ package application;
 import java.util.Scanner;
 
 import dictionary.DictionaryExercise;
+import graphModule.DungeonResolverExercise;
 import list.ListExercise;
 import priorityqueue.PriorityQueueExercise;
 import queue.QueueExercise;
@@ -43,6 +44,7 @@ public class MainProgram {
 			System.out.println("6 - Issue Tracker (Priority Queue)");
 			System.out.println("7 - Inventory Management (Dictionary)");
 			System.out.println("8 - Contacts App");
+			System.out.println("9 - Dijkstra dungeon solver");
 			String userInput = scanner.nextLine();
 			
 			switch (userInput) {
@@ -72,6 +74,9 @@ public class MainProgram {
 				break;
 			case "8":
 				exercise = new ContactsApp(scanner);
+				break;
+			case "9":
+				exercise = new DungeonResolverExercise(scanner);
 				break;
 			default:
 				System.out.println("Entrada inválida, intentá de nuevo.");			

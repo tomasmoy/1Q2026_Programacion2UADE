@@ -14,7 +14,7 @@ public class ListGraph<T> implements Graph<T> {
 	}
 
 	@Override
-	public T[] vertices() {
+	public SimpleList<T> vertices() {
 		return adjacencyList.keys();
 	}
 
@@ -31,9 +31,9 @@ public class ListGraph<T> implements Graph<T> {
 	public boolean removeVertex(T vertex) {
 		if (!containsVertex(vertex)) return false;
 		adjacencyList.remove(vertex);
-		T[] vertices = vertices();
-		for (int i = 0; i < vertices.length; i++) {
-			removeEdge(vertices[i], vertex);
+		SimpleList<T> vertices = vertices();
+		for (int i = 0; i < vertices.size(); i++) {
+			removeEdge(vertices.get(i), vertex);
 		}
 		return true;
 	}
@@ -91,4 +91,7 @@ public class ListGraph<T> implements Graph<T> {
 		return null;
 	}
 
+	public SimpleList<Edge<T>> getNeighbors(T vertex) {
+		return adjacencyList.get(vertex);
+	}
 }

@@ -27,9 +27,20 @@ public class SimpleLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 		}
 		
 		if(currentNode == first) {
-			newElement.next = currentNode;
-			currentNode.prev = newElement;
-			first = newElement;
+			if (priority < currentNode.priority) {
+				newElement.next = currentNode;
+				currentNode.prev = newElement;
+				first = newElement;
+			} else {
+				newElement.prev = currentNode;
+				newElement.next = currentNode.next;
+				if (currentNode.next != null) {
+					currentNode.next.prev = newElement;
+				} else {
+					last = newElement;
+				}
+				currentNode.next = newElement;
+			}
 		} else if (currentNode == last) {
 				newElement.prev = currentNode;
 				currentNode.next = newElement;
@@ -47,12 +58,13 @@ public class SimpleLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 	@Override
 	public E dequeue() {
 		if (isEmpty()) throw new NoSuchElementException("La Cola Esta Vacía");
-		LinkedPriorityNode<E> elementDeQueued = last;
-		last = last.prev;
-		if (last != null) last.next = null;
-		else first = null;
+		LinkedPriorityNode<E> elementDeQueued = first;
+		first = first.next;
+		if (first != null) first.prev = null;
+		else last = null;
 		size--;
 		return elementDeQueued.value;
+
 	}
 
 	@Override
